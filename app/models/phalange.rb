@@ -1,0 +1,2 @@
+class Phalange < ApplicationRecord
+end
