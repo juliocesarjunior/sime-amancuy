@@ -1,0 +1,24 @@
+<tr>
+    <th><%= phalange&.id %></th>
+    <td><%= phalange&.name %></td>
+    <td><%= phalange&.description %></td>
+    <td><span class="btn btn-pill <%=helper_bg_status(phalange)%>"><%= I18n.t("enums.status.#{phalange.status}") %></span></td>
+    <td><%=l phalange.created_at %></td>
+    <td class="table-action">
+        <%= link_to admin_user_path(phalange), class: 'btn btn-primary rounded-pill', data: { turbo: false },
+        :'data-tippy-content' => t('.show', default: t("helpers.links.show")) do %>
+        <i class="fa-solid fa-eye"></i>
+
+        <% end %>
+        <%= link_to edit_admin_phalange_path(phalange), class: 'btn btn-warning rounded-pill',
+        :'data-tippy-content' => t('.edit', default: t("helpers.links.edit")) do %>
+        <i class="fa-solid fa-edit"></i>
+
+        <% end %>
+
+        <%= link_to admin_phalange_path(phalange), method: :delete, data: { confirm: t("helpers.confirm") }, class: 'btn btn-danger rounded-pill',
+        :'data-tippy-content' => t('.destroy', default: t("helpers.links.destroy")) do %>
+        <i class="fa-solid fa-trash"></i>
+        <% end %>
+    </td>
+</tr>

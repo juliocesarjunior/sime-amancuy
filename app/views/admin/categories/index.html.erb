@@ -1,0 +1,53 @@
+<%- model_class = Category -%>
+<div class="container-fluid p-0">
+	<div class="mb-3">
+		<h1 class="h3 d-inline align-middle">
+			<%=I18n.t '.title', default: model_class.model_name.human.pluralize.titleize %></h1>
+	</div>
+
+	<%= render 'search', url_search: :search_admin_categories %>
+	
+	<div class="row">
+		<div class="col-12">
+			<div class="card">
+				<div class="card-body">
+					<div id="datatables-reponsive_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
+						
+						<div class="row">
+							<div class="col-sm-12 col-md-6 mb-3">
+								<div class="dataTables_length" id="datatables-reponsive_length">
+									<%= link_to "Inserir", new_admin_category_path, class: "btn btn-success" %>
+								</div>
+							</div>
+						</div>
+						<div class="paginationCurrent">
+							<%= paginate @categories %>
+                        	<%= page_entries_info @categories %>
+                        </div>
+						<div class="row dt-row">
+							<div class="col-sm-12 table-responsive">
+								<table class="table table-bordered  text-center">
+									<thead class="thead-dark">
+										<tr>
+											<th width="80"><%= model_class.human_attribute_name(:id) -%></th>
+											<th><%= model_class.human_attribute_name(:name) -%></th>
+											<th width="120"><%= model_class.human_attribute_name(:status) -%></th>
+											<th width="150"><%=t '.actions', default: t("helpers.actions") %></th>
+										</tr>
+									</thead>
+									<tbody>
+										<%= render @categories %>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="paginationCurrent">
+							<%= paginate @categories %>
+                        	<%= page_entries_info @categories %>
+                        </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

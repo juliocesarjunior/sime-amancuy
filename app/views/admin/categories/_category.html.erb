@@ -1,0 +1,17 @@
+<tr>
+	<td><%= category.id %></td>
+	<td><%= category.name %></td>
+	<td>
+		<span class="btn btn-pill <%=helper_bg_status(category)%>"><%= I18n.t("enums.status.#{category.status}") %></span>
+	</td>
+	<td class="table-action">
+
+		<%= link_to edit_admin_category_path(category), class: "btn btn-primary rounded-pill" do %>
+		<i class="fa-solid fa-edit"></i>
+		<% end -%>
+		
+		<%= link_to admin_category_path(category), method: :delete, class: "btn btn-danger rounded-pill" do %>
+		<i class="fa-solid fa-trash"></i>
+		<% end -%>
+	</td>
+</tr>

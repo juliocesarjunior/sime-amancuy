@@ -1,0 +1,33 @@
+pt-BR:
+  activerecord:
+    models:
+      user: Usuário
+      category: Categoria
+      library: Biblioteca
+      phalange: Falange
+      song: Canto
+    attributes:
+      default_attributes: &default_attributes
+        name: Nome
+        created_at: Cadastrado em
+        updated_at: Atualizado em
+
+      user:
+        <<: *default_attributes
+        password: Senha
+        password_confirmation: Confirmação de Senha
+
+      category:
+        <<: *default_attributes
+        description: Descrição
+
+      library:
+        <<: *default_attributes
+
+      phalange:
+        <<: *default_attributes
+        description: Descrição
+        image: Imagem
+
+      song:
+        <<: *default_attributes

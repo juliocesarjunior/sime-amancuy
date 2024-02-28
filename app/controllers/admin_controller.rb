@@ -1,7 +1,7 @@
 class AdminController < ActionController::Base
 
 	# DEVISE
-	#before_action :authenticate_user!
+	before_action :authenticate_user!
 	#before_action :admin_status_active
 	
 	layout 'admin'
@@ -10,6 +10,12 @@ class AdminController < ActionController::Base
 		if !current_user.nil? and current_user.status!="active"
 			redirect_to destroy_user_session_path
 		end
+	end
+
+	private
+
+	def after_sign_in_path_for(resource)
+		admin_root_path
 	end
 
 end
