@@ -42,7 +42,7 @@
                         <% end %>
                     </li>
                     <li class="sidebar-item">
-                        <%= link_to admin_phalanges_path, class: "sidebar-link #{controller_name == 'halanges' ? 'active' : ''}" do %>
+                        <%= link_to admin_phalanges_path, class: "sidebar-link #{controller_name == 'phalanges' ? 'active' : ''}" do %>
                         <span>
                             <i class="fa-solid fa-restroom"></i>
                         </span>
@@ -59,15 +59,15 @@
                </a>
            </li>
            <li class="sidebar-item">
-             <a class="sidebar-link" href="./ui-buttons.html" aria-expanded="false">
-              <span>
+            <%= link_to admin_libraries_path , class: "sidebar-link #{controller_name == 'libraries' ? 'active' : ''}" do %>
+            <span>
                <i class="fa-solid fa-book"></i>
            </span>
            <span class="hide-menu">Biblioteca</span>
-       </a>
-   </li>
+           <% end -%>
+       </li>
 
-</ul>
+   </ul>
 </nav>
 <!-- End Sidebar navigation -->
 </div>

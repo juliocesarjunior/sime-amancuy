@@ -3,9 +3,8 @@ class Admin::UsersController < AdminController
 
     # GET /admin/users or /admin/users.json
     def index
-      @q = User.order(created_at: :asc).ransack(params[:q])
-      @users = @q.result
-      @users = @users.page(params[:page])
+      @q = User.ransack(params[:q])
+      @users = @q.result.page(params[:page]).order(id: :asc)
     end
 
     # GET /admin/users/1 or /admin/users/1.json

@@ -1,11 +1,12 @@
 <tr>
-    <th><%= phalange&.id %></th>
+    <th><%= phalange&.order %></th>
     <td><%= phalange&.name %></td>
-    <td><%= phalange&.description %></td>
+<td><img src="<%= phalange.image.url.nil? ? '' : phalange.image.url %>" alt="<%= phalange&.name %>" width="60" height="auto"></td>
+
     <td><span class="btn btn-pill <%=helper_bg_status(phalange)%>"><%= I18n.t("enums.status.#{phalange.status}") %></span></td>
     <td><%=l phalange.created_at %></td>
     <td class="table-action">
-        <%= link_to admin_user_path(phalange), class: 'btn btn-primary rounded-pill', data: { turbo: false },
+        <%= link_to admin_phalange_path(phalange), class: 'btn btn-primary rounded-pill', data: { turbo: false },
         :'data-tippy-content' => t('.show', default: t("helpers.links.show")) do %>
         <i class="fa-solid fa-eye"></i>
 

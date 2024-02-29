@@ -28,6 +28,7 @@ pt-BR:
         <<: *default_attributes
         description: Descrição
         image: Imagem
+        order: Ordem
 
       song:
         <<: *default_attributes

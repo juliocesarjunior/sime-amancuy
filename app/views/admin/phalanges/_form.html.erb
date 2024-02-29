@@ -9,6 +9,9 @@
                 <div class="mb-3 col-md-4">
                     <%= f.input :status, as: :select, collection: Phalange.statuses.keys.map { |status| [I18n.t("enums.status.#{status}"), status] }, input_html: { class: "form-control form-select"}, hint_html: {class: "form-text"}, label_html: {class: "form-label"}  %>
                 </div>
+                <div class="mb-3 col-md-4">
+                    <%= f.input :order, input_html: { class: "form-control"}, hint_html: {class: "form-text"}, label_html: {class: "form-label"} %>
+                </div>
             </div>
             <div class="row">
                 <div class="mb-3 col-md-12">

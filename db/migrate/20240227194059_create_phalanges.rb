@@ -5,6 +5,7 @@ class CreatePhalanges < ActiveRecord::Migration[7.0]
       t.text :description
       t.integer :status, default: 0
       t.string :image
+      t.integer :order
       t.timestamps
     end
   end

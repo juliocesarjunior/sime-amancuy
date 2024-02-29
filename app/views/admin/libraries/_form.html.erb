@@ -1,0 +1,34 @@
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title"><%= @library.id.nil? ? 'Inserir' : 'Editar' %> <%=t '.title', default: model_class.model_name.human.pluralize.titleize %></h5>
+        </div>
+        <div class="card-body">
+            <%= simple_form_for([:admin, @library]) do |f| %>
+            <div class="row">
+                <div class="mb-3 col-md-4">
+                    <%= f.input :status, as: :select, collection: Phalange.statuses.keys.map { |status| [I18n.t("enums.status.#{status}"), status] }, input_html: { class: "form-control form-select"}, hint_html: {class: "form-text"}, label_html: {class: "form-label"}  %>
+                </div>
+            </div>
+            <div class="row">
+                <div class="mb-3 col-md-12">
+                    <%= f.input :name, input_html: { class: "form-control form-control-lg"}, hint_html: {class: "form-text"}, label_html: {class: "form-label"} %>
+                </div>
+                <div class="mb-3 col-md-12">
+                    <%= f.input :description, input_html: { class: "form-control form-control-lg"}, hint_html: {class: "form-text"}, label_html: {class: "form-label"} %>
+                </div>
+                <div class="mb-3 col-md-12">
+                    <%= f.simple_fields_for :archives do |archive| %>
+                    <div class="mb-3 col-md-12">
+                        <%= archive.input :file, input_html: { class: "form-control form-control-lg"} %>
+                    </div>
+                    <% end %>
+                </div>
+          </div>
+
+          <%= f.submit nil, class: 'btn btn-success', data: {disable_with: 'Salvando...'} %>
+          <%= link_to t('.cancel', default: t("helpers.links.cancel")),admin_phalanges_path, class: 'btn btn-outline-primary button_link' %>
+          <% end -%>
+      </div>
+  </div>
+</div>

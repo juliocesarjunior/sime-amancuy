@@ -3,9 +3,8 @@ class Admin::PhalangesController < AdminController
 
     # GET /admin/phalanges or /admin/phalanges.json
     def index
-      @q = Phalange.order(created_at: :asc).ransack(params[:q])
-      @phalanges = @q.result
-      @phalanges = @phalanges.page(params[:page])
+      @q = Phalange.ransack(params[:q])
+      @phalanges = @q.result.page(params[:page]).order(created_at: :asc)
     end
 
     # GET /admin/phalanges/1 or /admin/phalanges/1.json
@@ -37,10 +36,6 @@ class Admin::PhalangesController < AdminController
     # PATCH/PUT /admin/phalanges/1 or /admin/phalanges/1.json
     def update
       respond_to do |format|
-
-        params[:phalange].delete(:password) if params[:phalange][:password].blank?
-        params[:phalange].delete(:password_confirmation) if params[:phalange][:password].blank?
-
         if @phalange.update(phalange_params)
           format.html { redirect_to admin_phalange_url(@phalange), notice: "Phalange was successfully updated." }
           format.json { render :show, status: :ok, location: @phalange }
@@ -72,4 +67,4 @@ class Admin::PhalangesController < AdminController
     def phalange_params
       params.require(:phalange).permit!
     end
-end
+  end
