@@ -10,18 +10,22 @@ class FileUploader < CarrierWave::Uploader::Base
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
-    "uploads/files"
+    "uploads/files/#{model.class.to_s.underscore}"
   end
 
   def filename
-    time = Time.now
-    "#{time.year}/#{time.month}/#{time.day}/#{secure_token}.#{file.extension.downcase}" if original_filename.present?
+    if original_filename.present?
+      fileable_type = model.fileable_type.downcase.parameterize
+      name = model.fileable.name.parameterize if model.fileable.respond_to?(:name)
+      description = model.fileable.description.parameterize if model.fileable.respond_to?(:description)
+      "#{description}-#{name}-#{secure_token}.#{file.extension}"
+    end
   end
 
   protected
   def secure_token
-      var = :"@#{mounted_as}_secure_token"
-      model.instance_variable_get(var) or model.instance_variable_set(var, SecureRandom.uuid)
+    var = :"@#{mounted_as}_secure_token"
+    model.instance_variable_get(var) or model.instance_variable_set(var, SecureRandom.uuid)
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:

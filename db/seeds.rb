@@ -5,28 +5,56 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-User.create!(
-  name: 'Admin',
-  email: "admin@admin.com",
-  password: '1234567890',
-  status: 0
-)
+if false
 
-puts "##FALANGES"
-Dir["#{Rails.root}/app/assets/images/falanges/*.{jpg,png}"].sort_by { |file| file.match(/\d+/).to_s.to_i }.each_with_index do |file, index|
-  
-  content_type = File.extname(file) == ".jpg" ? "image/jpeg" : "image/png"
-  image = Rack::Test::UploadedFile.new(file, content_type)
+  User.create!(
+    name: 'Admin',
+    email: "admin@admin.com",
+    password: '1234567890',
+    status: 0
+    )
 
-  filename_without_extension = File.basename(file, ".*").gsub('-', ' ').humanize
-  filename_without_numbers = filename_without_extension.gsub(/\d+/, '')
+  puts "##FALANGES"
+  Dir["#{Rails.root}/app/assets/images/falanges/*.{jpg,png}"].sort_by { |file| file.match(/\d+/).to_s.to_i }.each_with_index do |file, index|
 
-  puts "## Falanges: #{filename_without_numbers}"
-  Phalange.create!(
-    name: filename_without_numbers.titleize,
-    description: filename_without_numbers.titleize,
-    status: 0,
-    image: image,
-    order: index + 1
+    content_type = File.extname(file) == ".jpg" ? "image/jpeg" : "image/png"
+    image = Rack::Test::UploadedFile.new(file, content_type)
+
+    filename_without_extension = File.basename(file, ".*").gsub('-', ' ').humanize
+    filename_without_numbers = filename_without_extension.gsub(/\d+/, '')
+
+    puts "## Falanges: #{filename_without_numbers}"
+    Phalange.create!(
+      name: filename_without_numbers.titleize,
+      description: filename_without_numbers.titleize,
+      status: 0,
+      image: image,
+      order: index + 1
+      )
+  end
+else
+puts "##BIBLIOTECA"
+Dir["#{Rails.root}/public/pdf/*.pdf"].each do |archive|
+  file = File.open(archive)
+  filename = File.basename(file.path).gsub('-', ' ').gsub('.pdf', '').humanize
+  library = Library.create(
+    name: filename,
+    description: filename,
+    status: 0
   )
+  archive_instance = Archive.new(
+    file: file,
+    fileable_type: "Library",
+    fileable_id: library.id
+  )
+
+  if archive_instance.save
+    puts "Arquivo salvo com sucesso!"
+  else
+    puts "Erro ao salvar o arquivo: #{archive_instance.errors.full_messages.join(', ')}"
+  end
 end
+
+end
+
+

@@ -13,7 +13,7 @@ class Admin::LibrariesController < AdminController
     # GET /admin/libraries/new
     def new
       @library = Library.new
-      @library.archives.build
+      #@library.archives.build
     end
 
     # GET /admin/libraries/1/edit
@@ -22,7 +22,6 @@ class Admin::LibrariesController < AdminController
     # POST /admin/libraries or /admin/libraries.json
     def create
       @library = Library.new(library_params)
-
       respond_to do |format|
         if @library.save
           format.html { redirect_to admin_library_url(@library), notice: "Library was successfully created." }

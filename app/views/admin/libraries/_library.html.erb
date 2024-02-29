@@ -2,24 +2,31 @@
     <th><%= library&.id %></th>
     <td><%= library&.name %></td>
     <td><%= library&.description rescue '---' %></td>
-    <td><img src="/assets/backgrounds/pdf.png" alt="<%= library&.name %>" width="40" height="auto"></td>
-    <td><span class="btn btn-pill <%=helper_bg_status(library)%>"><%= I18n.t("enums.status.#{library.status}") %></span></td>
-    <td><%=l library.created_at %></td>
-    <td class="table-action">
-        <%= link_to admin_library_path(library), class: 'btn btn-primary rounded-pill', data: { turbo: false },
-        :'data-tippy-content' => t('.show', default: t("helpers.links.show")) do %>
-        <i class="fa-solid fa-eye"></i>
+    <td>
+      <% if library.archives.present? %>
+      <% arquivo = library.archives.first %>
+      <a href="<%= arquivo.file.url %>" target="_blank">
+          <img src="/assets/backgrounds/pdf.png" alt="<%= library&.name %>" width="40" height="auto">
+      </a>
+      <% end %>
+  </td>
+  <td><span class="btn btn-pill <%=helper_bg_status(library)%>"><%= I18n.t("enums.status.#{library.status}") %></span></td>
+  <td><%=l library.created_at %></td>
+  <td class="table-action">
+    <%= link_to admin_library_path(library), class: 'btn btn-primary rounded-pill', data: { turbo: false },
+    :'data-tippy-content' => t('.show', default: t("helpers.links.show")) do %>
+    <i class="fa-solid fa-eye"></i>
 
-        <% end %>
-        <%= link_to edit_admin_library_path(library), class: 'btn btn-warning rounded-pill',
-        :'data-tippy-content' => t('.edit', default: t("helpers.links.edit")) do %>
-        <i class="fa-solid fa-edit"></i>
+    <% end %>
+    <%= link_to edit_admin_library_path(library), class: 'btn btn-warning rounded-pill',
+    :'data-tippy-content' => t('.edit', default: t("helpers.links.edit")) do %>
+    <i class="fa-solid fa-edit"></i>
 
-        <% end %>
+    <% end %>
 
-        <%= link_to admin_library_path(library), method: :delete, data: { confirm: t("helpers.confirm") }, class: 'btn btn-danger rounded-pill',
-        :'data-tippy-content' => t('.destroy', default: t("helpers.links.destroy")) do %>
-        <i class="fa-solid fa-trash"></i>
-        <% end %>
-    </td>
+    <%= link_to admin_library_path(library), method: :delete, data: { confirm: t("helpers.confirm") }, class: 'btn btn-danger rounded-pill',
+    :'data-tippy-content' => t('.destroy', default: t("helpers.links.destroy")) do %>
+    <i class="fa-solid fa-trash"></i>
+    <% end %>
+</td>
 </tr>
