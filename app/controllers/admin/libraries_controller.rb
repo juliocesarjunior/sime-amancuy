@@ -4,7 +4,7 @@ class Admin::LibrariesController < AdminController
     # GET /admin/libraries or /admin/libraries.json
     def index
       @q = Library.ransack(params[:q])
-      @libraries = @q.result.page(params[:page]).order(created_at: :asc)
+      @libraries = @q.result.page(params[:page]).order(name: :asc)
     end
 
     # GET /admin/libraries/1 or /admin/libraries/1.json

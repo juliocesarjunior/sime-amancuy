@@ -14,12 +14,14 @@ class FileUploader < CarrierWave::Uploader::Base
   end
 
   def filename
-    if original_filename.present?
-      fileable_type = model.fileable_type.downcase.parameterize
-      name = model.fileable.name.parameterize if model.fileable.respond_to?(:name)
-      description = model.fileable.description.parameterize if model.fileable.respond_to?(:description)
-      "#{description}-#{name}-#{secure_token}.#{file.extension}"
-    end
+    "#{original_filename.downcase}-#{secure_token}.#{file.extension.downcase}" if original_filename.present?
+
+    # if original_filename.present?
+    #   fileable_type = model.fileable_type.downcase.parameterize
+    #   name = model.fileable.name.parameterize if model.fileable.respond_to?(:name)
+    #   description = model.fileable.description.parameterize if model.fileable.respond_to?(:description)
+    #   "#{description}-#{name}-#{secure_token}.#{file.extension}"
+    # end
   end
 
   protected
