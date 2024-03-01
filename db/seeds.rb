@@ -32,28 +32,32 @@ if false
       order: index + 1
       )
   end
-else
-puts "##BIBLIOTECA"
-Dir["#{Rails.root}/public/pdf/*.pdf"].each do |archive|
-  file = File.open(archive)
-  filename = File.basename(file.path).gsub('-', ' ').gsub('.pdf', '').humanize
-  library = Library.create(
-    name: filename,
-    description: filename,
-    status: 0
-  )
-  archive_instance = Archive.new(
-    file: file,
-    fileable_type: "Library",
-    fileable_id: library.id
-  )
+  
+  Library.delete_all
+  Dir["#{Rails.root}/public/pdf/*.pdf"].each do |pdf_path|
+    pdf_name = File.basename(pdf_path, File.extname(pdf_path))
+    parts = pdf_name.split(" – ")
 
-  if archive_instance.save
-    puts "Arquivo salvo com sucesso!"
-  else
-    puts "Erro ao salvar o arquivo: #{archive_instance.errors.full_messages.join(', ')}"
+    if parts.length >= 2
+      description = parts[0].strip
+      name = parts[1..].join(" – ").strip
+
+      Library.create(
+        name: name,
+        description: description,
+        status: 0
+        )
+    end
   end
-end
+else
+  puts "##BIBLIOTECA"
+  Dir["#{Rails.root}/public/pdf/*.pdf"].each do |archive|
+    file = File.open(archive)
+    filename = File.basename(file.path).gsub('–', ' ').gsub('.pdf', '').humanize
+
+    puts filename
+  end
+
 
 end
 
