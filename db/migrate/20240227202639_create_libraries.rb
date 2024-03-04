@@ -4,6 +4,7 @@ class CreateLibraries < ActiveRecord::Migration[7.0]
       t.string :name
       t.text :description
       t.integer :status, default: 0
+      t.string :file
       t.timestamps
     end
   end

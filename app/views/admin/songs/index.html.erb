@@ -1,9 +1,9 @@
-<%- model_class = Library -%>
+<%- model_class = Song -%>
 <div class="container-fluid p-0">
     <div class="mb-3">
         <h1 class="h3 d-inline align-middle"><%=I18n.t '.title', default: model_class.model_name.human.pluralize.titleize %></h1>
     </div>
-    <%= render 'search', url_search: admin_libraries_path %>
+    <%= render 'search', url_search: admin_songs_path %>
 
     <div class="row">
         <div class="col-12">
@@ -13,7 +13,7 @@
                         <div class="row">
                             <div class="col-sm-12 col-md-6 mb-3">
                                 <div class="dataTables_length" id="datatables-reponsive_length">
-                                    <%= link_to "Inserir", new_admin_library_path, class: "btn btn-success" %>
+                                    <%= link_to "Inserir", new_admin_song_path, class: "btn btn-success" %>
                                 </div>
                             </div>
                         </div>
@@ -24,21 +24,20 @@
                                         <tr>
                                             <th scope="col">#</th>
                                             <th scope="col"><%= model_class.human_attribute_name(:name) -%></th>
-                                            <th scope="col"><%= model_class.human_attribute_name(:description) -%></th>
-                                            <th scope="col"><%= model_class.human_attribute_name(:file) -%></th>
+                                            <th scope="col"><%#= model_class.human_attribute_name(:file) -%></th>
                                             <th scope="col"><%= model_class.human_attribute_name(:status) -%></th>
                                             <th scope="col"><%= model_class.human_attribute_name(:created_at) %></th>
                                             <th scope="col" class="text-center"><%=t '.actions', default: t("helpers.actions") %></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <%= render @libraries %>
+                                        <%= render @songs %>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
-                        <%= paginate @libraries %>
-                        <%= page_entries_info @libraries %>
+                        <%= paginate @songs %>
+                        <%= page_entries_info @songs %>
                     </div>
                 </div>
             </div>

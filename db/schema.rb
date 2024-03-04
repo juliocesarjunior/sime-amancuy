@@ -15,11 +15,12 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_28_010727) do
   enable_extension "plpgsql"
 
   create_table "archives", force: :cascade do |t|
-    t.string "fileable_type"
-    t.integer "fileable_id"
+    t.bigint "song_id", null: false
     t.string "file"
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["song_id"], name: "index_archives_on_song_id"
   end
 
   create_table "audits", force: :cascade do |t|
@@ -56,6 +57,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_28_010727) do
     t.string "name"
     t.text "description"
     t.integer "status", default: 0
+    t.string "file"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -102,5 +104,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_28_010727) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "archives", "songs"
   add_foreign_key "songs", "phalanges"
 end

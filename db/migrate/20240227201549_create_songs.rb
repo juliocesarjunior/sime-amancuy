@@ -5,7 +5,6 @@ class CreateSongs < ActiveRecord::Migration[7.0]
       t.string :name
       t.text :description
       t.integer :status, default: 0
-      t.integer :song_type
       t.timestamps
     end
   end

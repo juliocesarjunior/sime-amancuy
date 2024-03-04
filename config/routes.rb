@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resources :users
     resources :phalanges
     resources :libraries
+    resources :songs
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

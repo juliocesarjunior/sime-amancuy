@@ -1,0 +1,40 @@
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title"><%= @song.id.nil? ? 'Inserir' : 'Editar' %> <%=t '.title', default: model_class.model_name.human.pluralize.titleize %></h5>
+        </div>
+        <div class="card-body">
+            <%= simple_form_for([:admin, @song]) do |f| %>
+            <div class="row">
+                <div class="mb-3 col-md-4">
+                    <%= f.input :status, as: :select, collection: Song.statuses.keys.map { |status| [I18n.t("enums.status.#{status}"), status] }, input_html: { class: "form-control form-select"}, hint_html: {class: "form-text"}, label_html: {class: "form-label"}  %>
+                </div>
+            </div>
+            <div class="row">
+                <div class="mb-3 col-md-12">
+                    <%= f.association :phalange, collection: Phalange.where("status=?", 0).order(order: :asc), wrapper: false, label_method: :name, value_method: :id, input_html: { class: "form-control form-control-lg form-select" }, include_blank: "Selecione o programa" %>
+                </div>
+                <div class="mb-3 col-md-12">
+                    <%= f.input :name, input_html: { class: "form-control form-control-lg"}, hint_html: {class: "form-text"}, label_html: {class: "form-label"} %>
+                </div>
+                <div class="mb-3 col-md-12">
+                    <%= f.input :description, input_html: { class: "form-control form-control-lg"}, hint_html: {class: "form-text"}, label_html: {class: "form-label"} %>
+                </div>
+                <div class="mb-3 col-md-12">
+                    <div id="programming_programs">
+                      <%= f.simple_fields_for :archives do |archive| %>
+                      <%= render '_song_archive_fields', :f => archive %>
+                      <% end %>
+                      <div class='actions'>
+                          <%= link_to_add_association 'Adicionar Programa', f, :archives, class: 'btn btn-success' %>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <%= f.submit nil, class: 'btn btn-success', data: {disable_with: 'Salvando...'} %>
+          <%= link_to t('.cancel', default: t("helpers.links.cancel")),admin_songs_path, class: 'btn btn-outline-primary button_link' %>
+          <% end -%>
+      </div>
+  </div>
+</div>

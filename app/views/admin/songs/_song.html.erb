@@ -1,0 +1,29 @@
+<tr>
+  <th><%= song&.id %></th>
+  <td><%= song&.name %></td>
+  <td><%#= song&.description rescue '---' %></td>
+  <td> <a href="<%#= library.file.url %>" target="_blank">
+    <img src="/assets/backgrounds/pdf.png" alt="<%= song&.name %>" width="40" height="auto">
+  </a>
+
+</td>
+<td><span class="btn btn-pill <%=helper_bg_status(song)%>"><%= I18n.t("enums.status.#{song.status}") %></span></td>
+<td><%=l song.created_at %></td>
+<td class="table-action">
+  <%= link_to admin_song_path(song), class: 'btn btn-primary rounded-pill', data: { turbo: false },
+  :'data-tippy-content' => t('.show', default: t("helpers.links.show")) do %>
+  <i class="fa-solid fa-eye"></i>
+
+  <% end %>
+  <%= link_to edit_admin_song_path(song), class: 'btn btn-warning rounded-pill',
+  :'data-tippy-content' => t('.edit', default: t("helpers.links.edit")) do %>
+  <i class="fa-solid fa-edit"></i>
+
+  <% end %>
+
+  <%= link_to admin_song_path(song), method: :delete, data: { confirm: t("helpers.confirm") }, class: 'btn btn-danger rounded-pill',
+  :'data-tippy-content' => t('.destroy', default: t("helpers.links.destroy")) do %>
+  <i class="fa-solid fa-trash"></i>
+  <% end %>
+</td>
+</tr>

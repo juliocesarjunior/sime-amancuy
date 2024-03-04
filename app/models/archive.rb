@@ -2,18 +2,26 @@
 #
 # Table name: archives
 #
-#  id            :bigint           not null, primary key
-#  file          :string
-#  fileable_type :string
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  fileable_id   :integer
+#  id         :bigint           not null, primary key
+#  file       :string
+#  name       :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  song_id    :bigint           not null
+#
+# Indexes
+#
+#  index_archives_on_song_id  (song_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (song_id => songs.id)
 #
 class Archive < ApplicationRecord
 	audited
 
-	belongs_to :fileable, polymorphic: true
-	validates_uniqueness_of :fileable_id, scope: :fileable_type
+	belongs_to :song
+
 	mount_uploader :file, FileUploader
 
 end

@@ -4,7 +4,7 @@ class Admin::PhalangesController < AdminController
     # GET /admin/phalanges or /admin/phalanges.json
     def index
       @q = Phalange.ransack(params[:q])
-      @phalanges = @q.result.page(params[:page]).order(created_at: :asc)
+      @phalanges = @q.result.page(params[:page]).order(order: :asc)
     end
 
     # GET /admin/phalanges/1 or /admin/phalanges/1.json

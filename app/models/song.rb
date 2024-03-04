@@ -24,7 +24,10 @@ class Song < ApplicationRecord
 
 	enum status: { active: 0, inactive: 1, deleted: 2 }, _default: :active
 
-	  has_many :archives, as: :fileable
+	belongs_to :phalange
+
+	has_many :archives, dependent: :destroy
+	accepts_nested_attributes_for :archives, reject_if: :all_blank, allow_destroy: true
 
 	def destroy
 		self.update_attribute(:status, 2)

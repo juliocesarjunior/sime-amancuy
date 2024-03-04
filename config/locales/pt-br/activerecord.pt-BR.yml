@@ -23,6 +23,8 @@ pt-BR:
 
       library:
         <<: *default_attributes
+        description: Descrição
+        file: Arquivo
 
       phalange:
         <<: *default_attributes

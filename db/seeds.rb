@@ -5,7 +5,7 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-if false
+if true
 
   User.create!(
     name: 'Admin',
@@ -32,25 +32,6 @@ if false
       order: index + 1
       )
   end
-  
-  Library.delete_all
-  puts "##BIBLIOTECA"
-  Dir["#{Rails.root}/public/pdf/*.pdf"].each do |pdf_path|
-    pdf_name = File.basename(pdf_path, File.extname(pdf_path))
-    parts = pdf_name.split(" – ")
-
-    if parts.length >= 2
-      description = parts[0].strip
-      name = parts[1..].join(" – ").strip
-
-      Library.create(
-        name: name,
-        description: description,
-        status: 0
-        )
-    end
-  end
-else
 
   Library.delete_all
   Archive.delete_all
@@ -59,7 +40,6 @@ else
     pdf_name = File.basename(pdf_path, File.extname(pdf_path))
     parts = pdf_name.split(" – ")
 
-    puts pdf_name
     if parts.length >= 2
       description = parts[0].strip
       name = parts[1..].join(" – ").strip
@@ -67,17 +47,14 @@ else
       library = Library.create(
         name: name,
         description: description,
-        status: 0
+        status: 0,
+        file: File.open(pdf_path)
         )
-
-      # Criação do registro no Archive
-      archive = Archive.create(
-       fileable_type: "Library",
-       fileable_id: library.id,
-       file: File.open(pdf_path)
-       )
     end
+    puts "## PDF: #{pdf_name} OK" 
   end
+else
+
   # puts "##BIBLIOTECA"
   # Dir["#{Rails.root}/public/pdf/*.pdf"].each do |archive|
   #   file = File.open(archive)

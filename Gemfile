@@ -111,6 +111,7 @@ gem 'jwt', '2.7.1'
 gem 'active_model_serializers'
 gem 'breadcrumbs_on_rails'
 gem "audited"
+gem "cocoon"
 
 # DEPLOY
 gem 'unicorn'

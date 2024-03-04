@@ -17,12 +17,8 @@
                 <div class="mb-3 col-md-12">
                     <%= f.input :description, input_html: { class: "form-control form-control-lg"}, hint_html: {class: "form-text"}, label_html: {class: "form-label"} %>
                 </div>
-                <div class="mb-3 col-md-12">
-                    <%= f.simple_fields_for :archives do |archive| %>
-                    <div class="mb-3 col-md-12">
-                        <%= archive.input :file, input_html: { class: "form-control form-control-lg"} %>
-                    </div>
-                    <% end %>
+                          <div class="mb-3 col-md-12">
+                    <%= f.input :file, input_html: { class: "form-control form-control-lg"}, hint_html: {class: "form-text"}, label_html: {class: "form-label"} %>
                 </div>
           </div>
 
