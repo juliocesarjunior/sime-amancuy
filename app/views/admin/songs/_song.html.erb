@@ -1,9 +1,8 @@
 <tr>
   <th><%= song&.id %></th>
   <td><%= song&.name %></td>
-  <td><%#= song&.description rescue '---' %></td>
-  <td> <a href="<%#= library.file.url %>" target="_blank">
-    <img src="/assets/backgrounds/pdf.png" alt="<%= song&.name %>" width="40" height="auto">
+  <td> <a data-bs-toggle="modal" data-bs-target="#bs-example-modal-lg">
+    <img src="/assets/backgrounds/pdf.png" width="40" height="auto">
   </a>
 
 </td>
@@ -27,3 +26,46 @@
   <% end %>
 </td>
 </tr>
+<%= song&.archives.inspect %>
+<div class="modal fade" id="bs-example-modal-lg" tabindex="-1" aria-labelledby="bs-example-modal-lg" style="display: none;" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header d-flex align-items-center">
+        <h4 class="modal-title" id="myLargeModalLabel">
+          Cantos Arquivos
+        </h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="col-md-12 d-flex align-items-stretch">
+          <div class="w-100">
+            <div class="card-body">
+              <div class="position-relative">
+                <% song&.archives.each do |archive| %>
+                <div class="d-flex align-items-center justify-content-between mb-4">
+                  <div class="d-flex">
+                    <div class="p-8 bg-primary-subtle rounded-2 d-flex align-items-center justify-content-center me-6">
+                      <img src="/assets/backgrounds/pdf.png" alt="" class="img-fluid" width="24" height="24">
+                    </div>
+                    <div>
+                      <h6 class="mb-1 fs-4 fw-semibold"><%= archive.file.url %></h6>
+                      <p class="fs-3 mb-0">Big Brands</p>
+                    </div>
+                  </div>
+                  <h6 class="mb-0 fw-semibold">+$6,235</h6>
+                </div>
+                <hr>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn bg-danger-subtle text-danger  waves-effect text-start" data-bs-dismiss="modal">
+          Fechar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

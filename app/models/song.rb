@@ -21,15 +21,22 @@
 #
 class Song < ApplicationRecord
 	audited
+	
+	after_initialize :build_default_archive
 
 	enum status: { active: 0, inactive: 1, deleted: 2 }, _default: :active
 
 	belongs_to :phalange
 
-	has_many :archives, dependent: :destroy
-	accepts_nested_attributes_for :archives, reject_if: :all_blank, allow_destroy: true
+	has_many :archives
+	accepts_nested_attributes_for :archives, allow_destroy: true
 
 	def destroy
 		self.update_attribute(:status, 2)
+	end
+
+	private
+	def build_default_archive
+		archives.build if archives.empty?
 	end
 end

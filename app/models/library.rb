@@ -21,9 +21,4 @@ class Library < ApplicationRecord
 	def destroy
 		self.update_attribute(:status, 2)
 	end
-
-	private
-	def build_default_archive
-		archives.build if archives.empty?
-	end
 end

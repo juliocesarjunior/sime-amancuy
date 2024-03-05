@@ -21,20 +21,18 @@
                     <%= f.input :description, input_html: { class: "form-control form-control-lg"}, hint_html: {class: "form-text"}, label_html: {class: "form-label"} %>
                 </div>
                 <div class="mb-3 col-md-12">
-                    <div id="programming_programs">
-                      <%= f.simple_fields_for :archives do |archive| %>
-                      <%= render '_song_archive_fields', :f => archive %>
-                      <% end %>
-                      <div class='actions'>
-                          <%= link_to_add_association 'Adicionar Programa', f, :archives, class: 'btn btn-success' %>
-                      </div>
-                  </div>
-              </div>
-          </div>
 
-          <%= f.submit nil, class: 'btn btn-success', data: {disable_with: 'Salvando...'} %>
-          <%= link_to t('.cancel', default: t("helpers.links.cancel")),admin_songs_path, class: 'btn btn-outline-primary button_link' %>
-          <% end -%>
-      </div>
-  </div>
+                        <%= f.simple_fields_for :archives do |archive| %>
+                        <%= render 'archive_fields', f: archive %>
+                        <% end %>
+                    <%= link_to_add_association "add archive", f, :archives, class: 'btn btn-dark' %>
+
+                </div>
+            </div>
+
+            <%= f.submit nil, class: 'btn btn-success', data: {disable_with: 'Salvando...'} %>
+            <%= link_to t('.cancel', default: t("helpers.links.cancel")),admin_songs_path, class: 'btn btn-outline-primary button_link' %>
+            <% end -%>
+        </div>
+    </div>
 </div>
