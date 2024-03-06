@@ -5,7 +5,6 @@
 #  id          :bigint           not null, primary key
 #  description :text
 #  name        :string
-#  song_type   :integer
 #  status      :integer          default("active")
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null

@@ -5,7 +5,6 @@
 #  id          :bigint           not null, primary key
 #  description :text
 #  name        :string
-#  song_type   :integer
 #  status      :integer          default("active")
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
@@ -26,7 +25,7 @@ class Song < ApplicationRecord
 
 	enum status: { active: 0, inactive: 1, deleted: 2 }, _default: :active
 
-	belongs_to :phalange
+	belongs_to :phalange, required: false
 
 	has_many :archives
 	accepts_nested_attributes_for :archives, allow_destroy: true

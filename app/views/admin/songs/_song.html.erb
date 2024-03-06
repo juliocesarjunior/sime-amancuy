@@ -1,71 +1,38 @@
 <tr>
   <th><%= song&.id %></th>
   <td><%= song&.name %></td>
-  <td> <a data-bs-toggle="modal" data-bs-target="#bs-example-modal-lg">
-    <img src="/assets/backgrounds/pdf.png" width="40" height="auto">
-  </a>
+  <td>
+    <% song.archives.each_with_index do |archive, index| %>
+      <% if !archive.file.url.nil? %>
+        <a href="<%= archive.file.url %>" target="_blank">
+          Canto - <%= archive.song.name %> <%= archive.name.nil? ? '' : archive.name %>
+        </a>
+        <% if index < song.archives.size - 1 %>
+          <hr>
+        <% end %>
+      <% end %>
+    <% end %>
+  </td>
+  <td>
+    <span class="btn btn-pill <%= helper_bg_status(song) %>">
+      <%= I18n.t("enums.status.#{song.status}") %>
+    </span>
+  </td>
+  <td><%= l song.created_at %></td>
+  <td class="table-action">
+    <%= link_to admin_song_path(song), class: 'btn btn-primary rounded-pill', data: { turbo: false },
+    :'data-tippy-content' => t('.show', default: t("helpers.links.show")) do %>
+      <i class="fa-solid fa-eye"></i>
+    <% end %>
 
-</td>
-<td><span class="btn btn-pill <%=helper_bg_status(song)%>"><%= I18n.t("enums.status.#{song.status}") %></span></td>
-<td><%=l song.created_at %></td>
-<td class="table-action">
-  <%= link_to admin_song_path(song), class: 'btn btn-primary rounded-pill', data: { turbo: false },
-  :'data-tippy-content' => t('.show', default: t("helpers.links.show")) do %>
-  <i class="fa-solid fa-eye"></i>
+    <%= link_to edit_admin_song_path(song), class: 'btn btn-warning rounded-pill',
+    :'data-tippy-content' => t('.edit', default: t("helpers.links.edit")) do %>
+      <i class="fa-solid fa-edit"></i>
+    <% end %>
 
-  <% end %>
-  <%= link_to edit_admin_song_path(song), class: 'btn btn-warning rounded-pill',
-  :'data-tippy-content' => t('.edit', default: t("helpers.links.edit")) do %>
-  <i class="fa-solid fa-edit"></i>
-
-  <% end %>
-
-  <%= link_to admin_song_path(song), method: :delete, data: { confirm: t("helpers.confirm") }, class: 'btn btn-danger rounded-pill',
-  :'data-tippy-content' => t('.destroy', default: t("helpers.links.destroy")) do %>
-  <i class="fa-solid fa-trash"></i>
-  <% end %>
-</td>
+    <%= link_to admin_song_path(song), method: :delete, data: { confirm: t("helpers.confirm") }, class: 'btn btn-danger rounded-pill',
+    :'data-tippy-content' => t('.destroy', default: t("helpers.links.destroy")) do %>
+      <i class="fa-solid fa-trash"></i>
+    <% end %>
+  </td>
 </tr>
-<%= song&.archives.inspect %>
-<div class="modal fade" id="bs-example-modal-lg" tabindex="-1" aria-labelledby="bs-example-modal-lg" style="display: none;" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header d-flex align-items-center">
-        <h4 class="modal-title" id="myLargeModalLabel">
-          Cantos Arquivos
-        </h4>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="col-md-12 d-flex align-items-stretch">
-          <div class="w-100">
-            <div class="card-body">
-              <div class="position-relative">
-                <% song&.archives.each do |archive| %>
-                <div class="d-flex align-items-center justify-content-between mb-4">
-                  <div class="d-flex">
-                    <div class="p-8 bg-primary-subtle rounded-2 d-flex align-items-center justify-content-center me-6">
-                      <img src="/assets/backgrounds/pdf.png" alt="" class="img-fluid" width="24" height="24">
-                    </div>
-                    <div>
-                      <h6 class="mb-1 fs-4 fw-semibold"><%= archive.file.url %></h6>
-                      <p class="fs-3 mb-0">Big Brands</p>
-                    </div>
-                  </div>
-                  <h6 class="mb-0 fw-semibold">+$6,235</h6>
-                </div>
-                <hr>
-                <% end %>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn bg-danger-subtle text-danger  waves-effect text-start" data-bs-dismiss="modal">
-          Fechar
-        </button>
-      </div>
-    </div>
-  </div>
-</div>

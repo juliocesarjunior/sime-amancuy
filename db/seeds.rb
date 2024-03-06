@@ -33,8 +33,7 @@ if true
       )
   end
 
-  Library.delete_all
-  Archive.delete_all
+
   puts "##BIBLIOTECA"
   Dir["#{Rails.root}/public/pdf/*.pdf"].each do |pdf_path|
     pdf_name = File.basename(pdf_path, File.extname(pdf_path))
@@ -53,13 +52,49 @@ if true
     end
     puts "## PDF: #{pdf_name} OK" 
   end
+
+  puts "##Cantos"
+  archives_by_falange = Hash.new { |hash, key| hash[key] = [] }
+
+  pdf_files = Dir["#{Rails.root}/public/Cantos/ordem/*.pdf"].sort_by { |file| File.basename(file).to_i }
+
+  pdf_files.each do |pdf_path|
+    pdf_name = File.basename(pdf_path, File.extname(pdf_path))
+    parts = pdf_name.split(" - ")
+
+    falange_number = parts[0].to_i
+    archive_name = parts[1..].join(" - ").strip
+
+    falange = Phalange.find_by(id: falange_number)
+
+    archives_by_falange[falange_number] << {
+      name: archive_name,
+      file: File.open(pdf_path)
+    }
+  end
+
+  archives_by_falange.each do |falange_number, archives|
+    falange = Phalange.find_by(id: falange_number)
+
+    song = Song.create!(
+      name: falange.name,
+      description: falange.name,
+      phalange_id: falange.id,
+      archives_attributes: archives
+      )
+    puts "## Song: #{song.name} OK"
+  end
 else
+  Archive.delete_all
+  Song.delete_all
 
-  # puts "##BIBLIOTECA"
-  # Dir["#{Rails.root}/public/pdf/*.pdf"].each do |archive|
-  #   file = File.open(archive)
-  #   filename = File.basename(file.path).gsub('–', ' ').gsub('.pdf', '').humanize
 
+
+
+
+  # puts "##canto"
+  # Dir["#{Rails.root}/public/Cantos/ordem/*.pdf"].each do |archive|
+  #   filename = File.basename(archive)
   #   puts filename
   # end
 

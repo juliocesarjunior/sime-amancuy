@@ -6,70 +6,70 @@
     				<img src="/assets/logos/dark-logo.svg" width="180" alt="" />
     			</a>
     			<div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
-    				<i class="ti ti-x fs-8"></i>
-    			</div>
-    		</div>
-    		<!-- Sidebar navigation-->
-    		<nav class="sidebar-nav scroll-sidebar" data-simplebar="">
-    			<ul id="sidebarnav">
-    				<li class="nav-small-cap">
-    					<i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-    					<span class="hide-menu">Home</span>
-    				</li>
+                    <i class="fa-regular fa-circle-xmark fa-2x"></i>
+                </div>
+            </div>
+            <!-- Sidebar navigation-->
+            <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
+             <ul id="sidebarnav">
+                <li class="nav-small-cap">
+                   <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                   <span class="hide-menu">Home</span>
+               </li>
 
-    				<li class="sidebar-item">
-                        <%= link_to admin_root_path, class: "sidebar-link #{controller_name == 'dashboard' ? 'active' : ''}" do %>
-                        <span>
-                            <i class="fa-solid fa-layer-group"></i>                       
-                        </span>
-                        <span class="hide-menu">Dashboard</span>
-                        <% end %>
-                    </li>
-                    <li class="sidebar-item">
-                        <%= link_to admin_users_path, class: "sidebar-link #{controller_name == 'users' ? 'active' : ''}" do %>
-                        <span>
-                            <i class="fa-solid fa-users"></i>
-                        </span>
-                        <span class="hide-menu">Usuários</span>
-                        <% end %>
-                    </li>
-                    <li class="sidebar-item">
-                        <%= link_to admin_categories_path, class: "sidebar-link #{controller_name == 'categories' ? 'active' : ''}" do %>
-                        <span>
-                            <i class="fa-solid fa-list"></i>
-                        </span>
-                        <span class="hide-menu">Categoria</span>
-                        <% end %>
-                    </li>
-                    <li class="sidebar-item">
-                        <%= link_to admin_phalanges_path, class: "sidebar-link #{controller_name == 'phalanges' ? 'active' : ''}" do %>
-                        <span>
-                            <i class="fa-solid fa-restroom"></i>
-                        </span>
-                        <span class="hide-menu">Falanges</span>
-                        <% end %>
-                    </li>
-                    <li class="sidebar-item">
-                        <%= link_to admin_songs_path, class: "sidebar-link #{controller_name == 'songs' ? 'active' : ''}" do %>
-                        <span>
-                         <i class="fa-solid fa-book-open-reader"></i>
-                     </span>
-                     <span class="hide-menu">Cantos</span>
-                     <% end %>
-                 </li>
+               <li class="sidebar-item">
+                <%= link_to admin_root_path, class: "sidebar-link #{controller_name == 'dashboard' ? 'active' : ''}" do %>
+                <span>
+                    <i class="fa-solid fa-layer-group"></i>                       
+                </span>
+                <span class="hide-menu">Dashboard</span>
+                <% end %>
+            </li>
+            <li class="sidebar-item">
+                <%= link_to admin_users_path, class: "sidebar-link #{controller_name == 'users' ? 'active' : ''}" do %>
+                <span>
+                    <i class="fa-solid fa-users"></i>
+                </span>
+                <span class="hide-menu">Usuários</span>
+                <% end %>
+            </li>
+            <li class="sidebar-item">
+                <%= link_to admin_categories_path, class: "sidebar-link #{controller_name == 'categories' ? 'active' : ''}" do %>
+                <span>
+                    <i class="fa-solid fa-list"></i>
+                </span>
+                <span class="hide-menu">Categoria</span>
+                <% end %>
+            </li>
+            <li class="sidebar-item">
+                <%= link_to admin_phalanges_path, class: "sidebar-link #{controller_name == 'phalanges' ? 'active' : ''}" do %>
+                <span>
+                    <i class="fa-solid fa-restroom"></i>
+                </span>
+                <span class="hide-menu">Falanges</span>
+                <% end %>
+            </li>
+            <li class="sidebar-item">
+                <%= link_to admin_songs_path, class: "sidebar-link #{controller_name == 'songs' ? 'active' : ''}" do %>
+                <span>
+                   <i class="fa-solid fa-book-open-reader"></i>
+               </span>
+               <span class="hide-menu">Cantos</span>
+               <% end %>
+           </li>
 
-                 <li class="sidebar-item">
-                    <%= link_to admin_libraries_path , class: "sidebar-link #{controller_name == 'libraries' ? 'active' : ''}" do %>
-                    <span>
-                     <i class="fa-solid fa-book"></i>
-                 </span>
-                 <span class="hide-menu">Biblioteca</span>
-                 <% end -%>
-             </li>
+           <li class="sidebar-item">
+            <%= link_to admin_libraries_path , class: "sidebar-link #{controller_name == 'libraries' ? 'active' : ''}" do %>
+            <span>
+               <i class="fa-solid fa-book"></i>
+           </span>
+           <span class="hide-menu">Biblioteca</span>
+           <% end -%>
+       </li>
 
-         </ul>
-     </nav>
-     <!-- End Sidebar navigation -->
- </div>
- <!-- End Sidebar scroll-->
+   </ul>
+</nav>
+<!-- End Sidebar navigation -->
+</div>
+<!-- End Sidebar scroll-->
 </aside>

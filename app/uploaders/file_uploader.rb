@@ -14,7 +14,13 @@ class FileUploader < CarrierWave::Uploader::Base
   end
 
   def filename
-    "#{original_filename.downcase}-#{secure_token}.#{file.extension.downcase}" if original_filename.present?
+    if model.class==Library
+      "#{model.description} – #{model.name.parameterize} – #{secure_token}.#{file.extension.downcase}" if original_filename.present?
+    elsif model.class==Archive
+      "#{"Canto – "}#{model.song.name.upcase.parameterize}-#{model.name.nil? ? '' : model.name.upcase.parameterize}-#{secure_token}.#{file.extension.downcase}" if original_filename.present?
+    else
+      "#{original_filename.parameterize}" if original_filename.present?
+    end
 
     # if original_filename.present?
     #   fileable_type = model.fileable_type.downcase.parameterize

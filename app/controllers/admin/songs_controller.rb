@@ -4,7 +4,7 @@ class Admin::SongsController < AdminController
     # GET /admin/songs or /admin/songs.json
     def index
     	@q = Song.ransack(params[:q])
-    	@songs = @q.result.page(params[:page]).order(name: :asc)
+    	@songs = @q.result.page(params[:page]).order(created_at: :asc)
     end
 
     # GET /admin/songs/1 or /admin/songs/1.json
