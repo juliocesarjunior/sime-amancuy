@@ -1,23 +1,29 @@
 class SongSerializer < BaseSerializer
   attributes :id,
-            :name, 
-            :description, 
-            :phalange, 
-            :status,
-            :archive,
-            :created_at,
-            :updated_at
+  :name, 
+  :description, 
+  :phalange, 
+  :status,
+  :archives,
+  :created_at,
+  :updated_at
 
-  def archive
-    archive = {
-      id: (object.archive.id rescue nil),
-      name: (object.archive.name rescue nil),
-      file: (object.archive.file rescue nil), 
-    }
+
+  def archives
+    object.archives.map do |archive|
+      {
+        id: archive.id,
+        name: archive.name,
+        file: archive.file.url
+      }
+    end
   end
 
   def phalange
-    object.phalange
+    {
+      id: object.phalange.id,
+      name: object.phalange.name
+    }
   end
 end
 

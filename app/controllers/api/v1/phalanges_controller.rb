@@ -6,7 +6,7 @@ class Api::V1::PhalangesController < ApiController
 		@per_page = params[:per_page] || 22
 		@page = params[:page] || 1
 
-		@q = Phalange.active.order(order: :desc).ransack(params[:q])
+		@q = Phalange.active.order(order: :asc).ransack(params[:q])
 		@phalanges = @q.result
 		@phalanges = @phalanges.page(@page).per(@per_page)
 

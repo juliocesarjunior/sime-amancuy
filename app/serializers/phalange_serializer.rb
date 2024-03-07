@@ -3,8 +3,8 @@ class PhalangeSerializer < BaseSerializer
               :name, 
               :description, 
               :status,
-              :image,
               :order,
+              :image,
               :created_at,
               :updated_at
 end
