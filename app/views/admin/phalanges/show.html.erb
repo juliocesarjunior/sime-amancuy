@@ -16,7 +16,7 @@
                     <div class="mb-3 col-12 text-center profile">
                         <img src="<%= @phalange.image.url.nil? ? '' : @phalange.image.url %>" width="302" height="210" alt="<%= @phalange&.name %>">
                     </div>
-                    <div class="mb-3 col-2">
+                    <div class="mb-3 col-4">
                         <%= model_class.human_attribute_name(:order) -%>: 
                         <input class="string optional form-control" value="<%= @phalange.order %>" readonly disabled>
                     </div>
@@ -25,12 +25,12 @@
                         <input class="string optional form-control" value="<%= @phalange.name %>" readonly disabled>
                     </div>
                     <div class="mb-3 col-4">
-                        <%= model_class.human_attribute_name(:description) -%>: 
-                        <input class="string optional form-control" value="<%= @phalange.description %>" readonly disabled>
-                    </div>
-                    <div class="mb-3 col-2">
                         <%= model_class.human_attribute_name(:status) -%>: 
                         <input class="string optional form-control" value="<%= I18n.t("enums.status.#{@phalange&.status}") %>" readonly disabled>
+                    </div>
+                    <div class="mb-3 col-12">
+                        <%= model_class.human_attribute_name(:description) -%>: 
+                        <input class="string optional form-control" value="<%= @phalange.description %>" readonly disabled>
                     </div>
                 </div>
             </div>

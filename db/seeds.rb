@@ -5,7 +5,7 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-if true
+if false
 
   User.create!(
     name: 'Admin',
@@ -26,13 +26,13 @@ if true
     puts "## Falanges: #{filename_without_numbers}"
     Phalange.create!(
       name: filename_without_numbers.titleize,
-      description: filename_without_numbers.titleize,
       status: 0,
       image: image,
       order: index + 1
       )
   end
 
+ load 'db/seed/historia.rb'
 
   puts "##BIBLIOTECA"
   Dir["#{Rails.root}/public/pdf/*.pdf"].each do |pdf_path|
@@ -84,18 +84,12 @@ if true
       )
     puts "## Song: #{song.name} OK"
   end
+
 else
-  Archive.delete_all
-  Song.delete_all
-
-
-
-
 
   # puts "##canto"
-  # Dir["#{Rails.root}/public/Cantos/ordem/*.pdf"].each do |archive|
-  #   filename = File.basename(archive)
-  #   puts filename
+  # Phalange.all.each do |txt|
+  #   puts "## #{txt.name}"
   # end
 
 
